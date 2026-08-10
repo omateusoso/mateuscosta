@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { siteConfig } from "@/lib/content/site";
 
 const links = [
+  ["Home", "/"],
   ["Serviços", "/#servicos"],
   ["Cases", "/cases"],
-  ["Processo", "/#processo"],
   ["FAQ", "/#faq"],
 ];
 
@@ -19,7 +20,7 @@ export function MobileNav() {
   }, [open]);
 
   return (
-    <div className="mobile-nav">
+    <div className="mobile-nav" data-open={open}>
       <button
         className="mobile-nav__trigger"
         type="button"
@@ -30,13 +31,18 @@ export function MobileNav() {
       >
         <span /><span /><span />
       </button>
-      {open ? (
-        <nav id="mobile-menu" className="mobile-nav__panel" aria-label="Navegação mobile">
-          {links.map(([label, href]) => (
-            <a key={href} href={href} className="button button--tertiary" onClick={() => setOpen(false)}>{label}</a>
-          ))}
-        </nav>
-      ) : null}
+      <nav id="mobile-menu" className="mobile-nav__panel" aria-label="Navegação mobile" aria-hidden={!open}>
+        <div className="mobile-nav__panel-content">
+          <div className="mobile-nav__links">
+            {links.map(([label, href]) => (
+              <a key={href} href={href} className="button button--tertiary" onClick={() => setOpen(false)}>{label}</a>
+            ))}
+          </div>
+          <a className="button button--secondary mobile-nav__cta" href={siteConfig.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
+            Entre em contato
+          </a>
+        </div>
+      </nav>
     </div>
   );
 }
