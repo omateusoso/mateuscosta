@@ -307,6 +307,9 @@ body:has(.case-study-page) .site-header, body:has(.case-study-page) .site-footer
 .case-study__back:hover { border-color: transparent; background: #5A3CFF; color: var(--color-text-button); }
 .case-study__badges { display: flex; flex-wrap: wrap; gap: .4rem; }
 .case-study__badges .badge { border: 1px solid rgba(255,255,255,.2); padding: 2px 12px; background: rgba(54,54,54,.2); color: #fff; font-family: var(--font-satoshi), system-ui, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0; line-height: 18px; text-align: center; text-wrap: wrap; }
+.case-study__official-link { width: 100%; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.15); border-radius: var(--radius-pill); padding: 6px 20px; background: transparent; color: #fff; font-family: var(--font-satoshi), system-ui, sans-serif; font-size: 13px; font-weight: 500; line-height: 18px; text-align: center; transition: background-color 1100ms cubic-bezier(.22, 1, .36, 1), border-color 1100ms cubic-bezier(.22, 1, .36, 1), color 1100ms cubic-bezier(.22, 1, .36, 1); }
+.case-study__official-link:hover { border-color: transparent; background: #7E43FF; color: #fff; }
+.case-study__official-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .case-study__divider { height: 1px; flex: 0 0 auto; background: rgba(255,255,255,.13); }
 .case-study__description-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
 .case-study__description-scroll::-webkit-scrollbar { display: none; }

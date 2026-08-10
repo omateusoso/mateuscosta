@@ -35,6 +35,8 @@ export interface PortfolioCase {
   cover_storage_bucket: StorageBucket | null;
   cover_storage_path: string | null;
   external_url: string;
+  external_link_label: string;
+  external_link_enabled: boolean;
   featured_on_home: boolean;
   home_order: number;
   portfolio_order: number;
