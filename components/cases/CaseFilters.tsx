@@ -5,14 +5,20 @@ import { useMemo, useState } from "react";
 import type { PortfolioCase } from "@/lib/supabase/database.types";
 
 export function CaseFilters({ cases, categories }: { cases: PortfolioCase[]; categories: string[] }) {
-  const [activeCategory, setActiveCategory] = useState("Todas");
-  const visibleCases = useMemo(() => activeCategory === "Todas" ? cases : cases.filter((item) => item.categories.includes(activeCategory)), [activeCategory, cases]);
+  const [activeCategories, setActiveCategories] = useState<string[]>([]);
+  const visibleCases = useMemo(() => activeCategories.length === 0 ? cases : cases.filter((item) => item.categories.some((category) => activeCategories.includes(category))), [activeCategories, cases]);
+
+  function toggleCategory(category: string) {
+    setActiveCategories((currentCategories) => currentCategories.includes(category)
+      ? currentCategories.filter((currentCategory) => currentCategory !== category)
+      : [...currentCategories, category]);
+  }
 
   return (
     <>
       <nav className="case-category-filters" aria-label="Filtrar cases por categoria">
-        {["Todas", ...categories].map((category) => (
-          <button key={category} type="button" className={`button button--secondary${activeCategory === category ? " active" : ""}`} aria-pressed={activeCategory === category} onClick={() => setActiveCategory(category)}>{category}</button>
+        {categories.map((category) => (
+          <button key={category} type="button" className={`button button--secondary${activeCategories.includes(category) ? " active" : ""}`} aria-pressed={activeCategories.includes(category)} onClick={() => toggleCategory(category)}>{category}</button>
         ))}
       </nav>
       <div className="cases-grid cases-grid--listing" aria-live="polite">
@@ -28,7 +34,7 @@ export function CaseFilters({ cases, categories }: { cases: PortfolioCase[]; cat
           </a>
         ))}
       </div>
-      {!visibleCases.length ? <p className="cases-filter-empty">Ainda não há cases publicados nesta categoria.</p> : null}
+      {!visibleCases.length ? <p className="cases-filter-empty">Ainda não há cases publicados nas categorias selecionadas.</p> : null}
     </>
   );
 }

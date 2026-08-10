@@ -72,7 +72,7 @@ export default async function CaseDetailPage({ params }: Props) {
         <section className="case-study__details">
           <div className="case-study__title-row">
             <Link className="case-study__back" href="/cases" aria-label="Voltar para a página de cases"><ChevronLeft aria-hidden="true" size={16} /></Link>
-            <h1>{item.title}</h1>
+            <h6>{item.title}</h6>
           </div>
           {item.categories.length ? <div className="case-study__badges" aria-label="Categorias do projeto">{item.categories.map((category) => <span className="badge" key={category}>{category}</span>)}</div> : null}
           <div className="case-study__divider" />
