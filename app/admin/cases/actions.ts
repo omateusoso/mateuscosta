@@ -279,6 +279,8 @@ export async function saveCaseAction(formData: FormData): Promise<{ caseId: stri
       content_json: richTextDocumentJson(input.content_html),
       cover_url: "",
       external_url: input.external_url,
+      external_link_label: input.external_link_label,
+      external_link_enabled: input.external_link_enabled,
       featured_on_home: input.featured_on_home,
       home_order: input.home_order,
       portfolio_order: input.portfolio_order,

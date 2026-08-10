@@ -26,4 +26,12 @@ describe("caseSchema", () => {
     data.set("categories", "Outra");
     expect(() => caseInputFromFormData(data, ["Branding"])).toThrow("Categorias indisponíveis");
   });
+
+  it("aceita o texto configurável para o botão do link oficial", () => {
+    expect(caseSchema.parse({ ...valid, external_url: "https://cliente.com.br", external_link_label: "Ver projeto" })).toMatchObject({
+      external_url: "https://cliente.com.br",
+      external_link_label: "Ver projeto",
+      external_link_enabled: false,
+    });
+  });
 });

@@ -116,7 +116,7 @@ export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptio
     defaultValues: {
       title: item?.title ?? "", slug: item?.slug ?? "",
       categories: item?.categories.join(", ") ?? "", excerpt: item?.excerpt ?? "", content_html: serializeRichTextDocument(documentFromStoredContent(item?.content_html)),
-      cover_url: item?.cover_url ?? "", external_url: item?.external_url ?? "", status: item?.status ?? "draft",
+      cover_url: item?.cover_url ?? "", external_url: item?.external_url ?? "", external_link_label: item?.external_link_label ?? "Acessar projeto oficial", external_link_enabled: item?.external_link_enabled ?? false, status: item?.status ?? "draft",
       home_order: item?.home_order ?? 999, portfolio_order: item?.portfolio_order ?? 999,
       seo_title: item?.seo_title ?? "", seo_description: item?.seo_description ?? "", published_at: datetimeLocalValue(item?.published_at),
     },
@@ -350,6 +350,7 @@ export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptio
       <input type="hidden" {...register("status")} />
       <input type="hidden" {...register("categories")} />
       <input type="hidden" {...register("cover_url")} />
+      <input type="hidden" {...register("external_link_enabled")} />
 
       <div className="admin-editor-layout">
         <fieldset disabled={pending}>
@@ -362,6 +363,12 @@ export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptio
               <FieldError message={errors.categories?.message} />
             </div>
             <label className={errors.excerpt ? "has-error" : ""}>Descrição curta<textarea rows={3} aria-invalid={Boolean(errors.excerpt)} {...register("excerpt")} /><span className="field-counter">{excerpt.length}/320 caracteres</span><FieldError message={errors.excerpt?.message} /></label>
+            <div className="admin-case-official-link">
+              <span className="admin-field-label">Link oficial</span>
+              <p>Adicione o endereço publicado do projeto e defina o texto do botão exibido no case.</p>
+              <label className={errors.external_url ? "has-error" : ""}>URL do projeto<input data-testid="case-official-link" type="url" inputMode="url" placeholder="https://www.empresa.com.br" aria-invalid={Boolean(errors.external_url)} {...register("external_url", { onChange: (event) => setValue("external_link_enabled", Boolean(event.target.value.trim()), { shouldDirty: true }) })} /><FieldError message={errors.external_url?.message} /></label>
+              <label className={errors.external_link_label ? "has-error" : ""}>Texto do botão<input data-testid="case-official-link-label" placeholder="Acessar projeto oficial" aria-invalid={Boolean(errors.external_link_label)} {...register("external_link_label")} /><FieldError message={errors.external_link_label?.message} /></label>
+            </div>
           </section>
 
           <section className="admin-panel">

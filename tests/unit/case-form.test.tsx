@@ -26,6 +26,8 @@ const itemWithCover = {
   cover_storage_bucket: "portfolio-media",
   cover_storage_path: "covers/capa.webp",
   external_url: "",
+  external_link_label: "Acessar projeto oficial",
+  external_link_enabled: false,
   featured_on_home: false,
   home_order: 999,
   portfolio_order: 999,
@@ -63,6 +65,21 @@ describe("CaseForm", () => {
     await waitFor(() => expect(action).toHaveBeenCalledTimes(1));
     expect(action.mock.calls[0]?.[0].get("status")).toBe("draft");
     expect(action.mock.calls[0]?.[0].get("cover_manifest")).toBe('{"source":"none"}');
+  });
+
+  it("envia o link oficial e o texto configurado para o botão", async () => {
+    const action = vi.fn((data: FormData) => { void data; return new Promise<never>(() => {}); });
+    render(<CaseForm categoryOptions={["Branding"]} action={action} createCategoryAction={vi.fn()} />);
+
+    await userEvent.type(screen.getByTestId("case-official-link"), "https://cliente.com.br");
+    await userEvent.clear(screen.getByTestId("case-official-link-label"));
+    await userEvent.type(screen.getByTestId("case-official-link-label"), "Visitar site oficial");
+    await userEvent.click(screen.getByTestId("save-case"));
+
+    await waitFor(() => expect(action).toHaveBeenCalledTimes(1));
+    expect(action.mock.calls[0]?.[0].get("external_url")).toBe("https://cliente.com.br");
+    expect(action.mock.calls[0]?.[0].get("external_link_label")).toBe("Visitar site oficial");
+    expect(action.mock.calls[0]?.[0].get("external_link_enabled")).toBe("true");
   });
 
   it("explica e marca os campos obrigatórios para publicar", async () => {
