@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { CaseFilters } from "@/components/cases/CaseFilters";
+import { LandingBackground } from "@/components/effects/LandingBackground";
 import { getPublishedCases } from "@/lib/queries/cases";
 import { getPortfolioCategories } from "@/lib/queries/portfolio-categories";
 
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 export default async function CasesPage() {
   const [cases, categories] = await Promise.all([getPublishedCases(), getPortfolioCategories()]);
   return (
-    <main id="conteudo" className="listing-page">
+    <main id="conteudo" className="listing-page site-background-page">
+      <LandingBackground />
       <Container>
         <header className="listing-page__header">
           <p className="section-label">Portfólio</p>

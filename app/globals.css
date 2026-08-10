@@ -67,9 +67,9 @@ body {
 
 .landing-background { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
 .landing-background__liquid { width: 100%; height: 100%; }
-.home-page { position: relative; z-index: 1; background: transparent; }
-body:has(.home-page) { background: var(--color-bg); }
-.home-page > :not(.landing-background) { position: relative; z-index: 1; }
+.site-background-page { position: relative; z-index: 1; background: transparent; }
+body:has(.site-background-page) { background: var(--color-bg); }
+.site-background-page > :not(.landing-background) { position: relative; z-index: 1; }
 .home-page .hero::after,
 .home-page .cases-section,
 .home-page .about-section,

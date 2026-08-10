@@ -32,12 +32,12 @@ export function LandingBackground() {
           cursorSize={100}
           isViscous={false}
           viscous={30}
-          colors={["#1d1353", "#9A3CFF", "#9A3CFF"]}
+          colors={["#2e0b6a", "#9876e8", "#9876e8"]}
           autoDemo
           autoSpeed={0.5}
           autoIntensity={2.2}
           isBounce={false}
-          resolution={0.25}
+          resolution={0.5}
           className="landing-background__liquid"
         />
       ) : null}
