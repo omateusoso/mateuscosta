@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import type { PortfolioCase } from "@/lib/supabase/database.types";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 
 export function CaseFilters({ cases, categories }: { cases: PortfolioCase[]; categories: string[] }) {
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
@@ -17,21 +18,25 @@ export function CaseFilters({ cases, categories }: { cases: PortfolioCase[]; cat
   return (
     <>
       <nav className="case-category-filters" aria-label="Filtrar cases por categoria">
-        {categories.map((category) => (
-          <button key={category} type="button" className={`button button--secondary${activeCategories.includes(category) ? " active" : ""}`} aria-pressed={activeCategories.includes(category)} onClick={() => toggleCategory(category)}>{category}</button>
+        {categories.map((category, index) => (
+          <ScrollReveal delay={index * 0.025} key={category}>
+            <button type="button" className={`button button--secondary${activeCategories.includes(category) ? " active" : ""}`} aria-pressed={activeCategories.includes(category)} onClick={() => toggleCategory(category)}>{category}</button>
+          </ScrollReveal>
         ))}
       </nav>
       <div className="cases-grid cases-grid--listing" aria-live="polite">
-        {visibleCases.map((item) => (
-          <a className="case-card" href={`/cases/${item.slug}`} key={item.id}>
-            {item.cover_url ? <Image src={item.cover_url} alt={`Capa do case ${item.title}`} fill sizes="(max-width: 809px) 100vw, (max-width: 1279px) 50vw, 33vw" /> : null}
-            <span className="case-card__meta">
-              <strong>{item.title}</strong>
-              <span className="case-card__categories" aria-label={`Categorias: ${item.categories.join(", ")}`}>
-                {item.categories.map((category) => <span className="badge case-card__badge" key={category}>{category}</span>)}
+        {visibleCases.map((item, index) => (
+          <ScrollReveal delay={index * 0.025} key={item.id}>
+            <a className="case-card" href={`/cases/${item.slug}`}>
+              {item.cover_url ? <Image src={item.cover_url} alt={`Capa do case ${item.title}`} fill sizes="(max-width: 809px) 100vw, (max-width: 1279px) 50vw, 33vw" /> : null}
+              <span className="case-card__meta">
+                <strong>{item.title}</strong>
+                <span className="case-card__categories" aria-label={`Categorias: ${item.categories.join(", ")}`}>
+                  {item.categories.map((category) => <span className="badge case-card__badge" key={category}>{category}</span>)}
+                </span>
               </span>
-            </span>
-          </a>
+            </a>
+          </ScrollReveal>
         ))}
       </div>
       {!visibleCases.length ? <p className="cases-filter-empty">Ainda não há cases publicados nas categorias selecionadas.</p> : null}
