@@ -26,9 +26,9 @@ export function Hero() {
             className="hero-title__line"
           />
         </h1>
-        <div className="hero__description" aria-label="A LUMO oferece serviços de design com o que tem de mais novo no mercado. Venha inovar com a gente.">
+        <div className="hero__description" aria-label="Mateus Costa cria experiências de design com estratégia e tecnologia.">
           <BlurText
-            text="A LUMO oferece serviços de design com o que tem de mais novo"
+            text="Mateus Costa cria experiências de design com estratégia"
             animateBy="words"
             delay={38}
             startDelay={650}
@@ -37,7 +37,7 @@ export function Hero() {
             className="hero__description-line"
           />
           <BlurText
-            text="no mercado. Venha inovar com a gente."
+            text="e tecnologia para transformar ideias em resultados."
             animateBy="words"
             delay={38}
             startDelay={1068}
@@ -48,8 +48,8 @@ export function Hero() {
         </div>
         <SpecularButton
           className="hero-cta specular-button--primary"
-          href={siteConfig.whatsapp}
-          external
+          href={siteConfig.whatsapp || "/#contato"}
+          external={Boolean(siteConfig.whatsapp)}
         >
           Fazer um orçamento
         </SpecularButton>

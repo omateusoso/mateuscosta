@@ -7,7 +7,7 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
 };
 
-const protectedEmails = new Set(["davidraksa@live.com", "omateusosos@gmail.com"]);
+const protectedEmails = new Set(["admin@mateuscosta.local"]);
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {

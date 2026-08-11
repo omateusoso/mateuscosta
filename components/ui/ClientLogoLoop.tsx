@@ -58,7 +58,7 @@ export function ClientLogoLoop({ names }: { names: readonly string[] }) {
 
   return (
     <LogoLoop
-      ariaLabel="Algumas marcas que confiam na LUMO"
+      ariaLabel="Algumas marcas presentes no portfólio de Mateus Costa"
       fadeOut
       fadeOutColor="#05020d"
       gap={101}

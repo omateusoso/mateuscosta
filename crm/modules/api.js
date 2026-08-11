@@ -31,7 +31,7 @@ import {
 import { isSuperAdmin } from "./permissions.js?v=2";
 import { normalizeAssetUrl } from "./utils.js?v=3";
 
-const PROTECTED_SUPER_ADMIN_EMAILS = new Set(["davidraksa@live.com", "omateusosos@gmail.com"]);
+const PROTECTED_SUPER_ADMIN_EMAILS = new Set(["admin@mateuscosta.local"]);
 
 export function createApiModule({ state, supabaseConfig, getSupabase, isLoggedIn }) {
   const DEFAULT_FINANCIAL_SETTINGS = {
@@ -266,7 +266,7 @@ export function createApiModule({ state, supabaseConfig, getSupabase, isLoggedIn
     }
 
     if (error) {
-      console.warn("[RAKSA Admin] Supabase indisponivel, usando fallback local.", error);
+      console.warn("[Mateus Costa Admin] Supabase indisponível; usando fallback local.", error);
       state.cases = (getStoredCases() || initialCases).map(withCaseDefaults);
       return;
     }
@@ -321,7 +321,7 @@ export function createApiModule({ state, supabaseConfig, getSupabase, isLoggedIn
       .maybeSingle();
 
     if (error) {
-      console.warn("[RAKSA Admin] Perfil interno indisponivel.", error);
+      console.warn("[Mateus Costa Admin] Perfil interno indisponível.", error);
       state.currentUserProfile = fallbackProfileForSession();
       return state.currentUserProfile;
     }
@@ -657,7 +657,7 @@ export function createApiModule({ state, supabaseConfig, getSupabase, isLoggedIn
     state.crmLoading = false;
     const error = [clients, contacts, projects, products, productSubstrates, substrates, budgets, serviceOrders, serviceOrderItems, timeEntries, metricsEvents].find((result) => result.error)?.error;
     if (error) {
-      console.warn("[RAKSA Admin] CRM indisponivel.", error);
+      console.warn("[Mateus Costa Admin] CRM indisponível.", error);
       return;
     }
 
@@ -851,7 +851,7 @@ export function createApiModule({ state, supabaseConfig, getSupabase, isLoggedIn
       upsertError = fallback.error;
     }
 
-    if (upsertError) console.warn("[RAKSA Admin] Nao foi possivel popular cases iniciais.", upsertError);
+    if (upsertError) console.warn("[Mateus Costa Admin] Não foi possível popular cases iniciais.", upsertError);
   }
 
   return {

@@ -1,7 +1,7 @@
 import "server-only";
 
 import { cache } from "react";
-import { requireSupabaseConfig } from "@/lib/supabase/config";
+import { getSupabaseConfig } from "@/lib/supabase/config";
 import type { PortfolioCase } from "@/lib/supabase/database.types";
 import { normalizeMediaUrl } from "@/lib/portfolio/media-url";
 
@@ -14,7 +14,8 @@ function coverUrl(item: PortfolioCase, baseUrl: string) {
 }
 
 async function fetchCases(query: string): Promise<PortfolioCase[]> {
-  const config = requireSupabaseConfig();
+  const config = getSupabaseConfig();
+  if (!config) return [];
 
   const response = await fetch(
     `${config.url}/rest/v1/portfolio_cases?${query}`,
@@ -67,7 +68,8 @@ export const getPublishedCaseResolution = cache(async (slug: string) => {
   const current = await getPublishedCaseBySlug(slug);
   if (current) return { item: current, legacySlug: false };
 
-  const config = requireSupabaseConfig();
+  const config = getSupabaseConfig();
+  if (!config) return { item: null, legacySlug: false };
   const historyResponse = await fetch(
     `${config.url}/rest/v1/portfolio_case_slug_history?select=case_id,old_slug&old_slug=eq.${encodeURIComponent(slug)}&limit=1`,
     {

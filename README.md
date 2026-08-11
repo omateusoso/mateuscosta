@@ -1,12 +1,12 @@
-# RAKSA Design — plataforma Next.js
+# Mateus Costa — portfólio e CMS
 
-Aplicação pública e CMS administrativo reconstruídos com Next.js App Router, React, TypeScript, Tailwind CSS e Supabase.
+Portfólio pessoal e CMS administrativo construídos com Next.js App Router, React, TypeScript, Tailwind CSS e Supabase. A arquitetura, o painel e as migrations foram mantidos para serem conectados a um projeto Supabase exclusivo de `mateuscosta`.
 
 ## Requisitos
 
 - Node.js 22 ou superior
 - npm
-- projeto Supabase com as migrations deste repositório aplicadas
+- novo projeto Supabase com as migrations deste repositório aplicadas
 
 ## Configuração
 
@@ -18,7 +18,16 @@ npm run dev
 
 Acesse `http://localhost:3000`. O login administrativo fica em `http://localhost:3000/admin/login`.
 
-Sem variáveis Supabase, a landing page usa um snapshot local dos cases para permitir desenvolvimento visual. Autenticação e operações administrativas permanecem indisponíveis até a configuração real — não há sessão ou permissão simulada.
+Sem variáveis Supabase, não conecte o site a nenhum ambiente existente. Autenticação e operações administrativas permanecem indisponíveis até a configuração do novo projeto — não há sessão ou permissão simulada.
+
+## Supabase novo
+
+1. Crie um projeto Supabase exclusivo para `mateuscosta`.
+2. Copie `.env.example` para `.env.local` e preencha somente as credenciais desse projeto.
+3. Aplique as migrations de `supabase/migrations` no novo projeto, seguindo a ordem dos timestamps.
+4. Crie o primeiro usuário administrador e ajuste o placeholder `admin@mateuscosta.local` nas migrations/schema antes de provisionar usuários, se necessário.
+
+Não reutilize URL, chaves, buckets ou dados de projetos anteriores. Os buckets esperados pelo CMS são `portfolio-drafts`, `portfolio-media` e o bucket legado `case-images`.
 
 ## Comandos
 

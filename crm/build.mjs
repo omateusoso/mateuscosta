@@ -14,11 +14,11 @@ const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const anonKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 if (!url || !anonKey) {
-  throw new Error("Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY.");
+  console.warn("CRM built without Supabase configuration; provide NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY to enable authentication.");
 }
 
 await writeFile(
   new URL("./supabase-config.js", outputDirectory),
-  `window.RAKSA_SUPABASE = ${JSON.stringify({ url, anonKey })};\n`,
+  `window.MATEUSCOSTA_SUPABASE = ${JSON.stringify(url && anonKey ? { url, anonKey } : {})};\n`,
   "utf8",
 );

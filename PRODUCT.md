@@ -6,11 +6,11 @@ brand
 
 ## Users
 
-Clientes e potenciais clientes que avaliam a RAKSA como parceira de design, buscando sinais rápidos de qualidade, domínio técnico e maturidade criativa.
+Pessoas e equipes que avaliam o trabalho de Mateus Costa, buscando sinais rápidos de qualidade, domínio técnico e maturidade criativa.
 
 ## Product Purpose
 
-Apresentar a RAKSA, seus serviços e portfólio de forma memorável e confiável, convertendo interesse em contato comercial.
+Apresentar Mateus Costa, seus serviços e portfólio de forma memorável e confiável, convertendo interesse em contato profissional.
 
 ## Brand Personality
 

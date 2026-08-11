@@ -17,7 +17,7 @@ export function Header() {
             <Link href="/cases" className="button button--tertiary">Cases</Link>
             <Link href="/#faq" className="button button--tertiary">FAQ</Link>
           </nav>
-          <a className="button button--secondary site-header__cta" href={siteConfig.whatsapp} target="_blank" rel="noreferrer">
+          <a className="button button--secondary site-header__cta" href={siteConfig.whatsapp || "/#contato"} target={siteConfig.whatsapp ? "_blank" : undefined} rel={siteConfig.whatsapp ? "noreferrer" : undefined}>
             Entre em contato
           </a>
           <MobileNav />

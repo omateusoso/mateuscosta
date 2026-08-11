@@ -19,7 +19,7 @@ import {
 } from "./modules/permissions.js?v=2";
 
 const app = document.querySelector("#app");
-const supabaseConfig = window.RAKSA_SUPABASE || {};
+const supabaseConfig = window.MATEUSCOSTA_SUPABASE || {};
 let supabase = null;
 if (supabaseConfig.url && supabaseConfig.anonKey) {
   const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
@@ -533,7 +533,7 @@ document.addEventListener("submit", async (event) => {
     }
 
     await getCurrentUserProfile({ touchLastLogin: true });
-    await logActivity("fez login", "auth", "auth_user", authData.session?.user?.id || "", "Entrou na plataforma Lumo Design.", null, null);
+    await logActivity("fez login", "auth", "auth_user", authData.session?.user?.id || "", "Entrou na plataforma Mateus Costa.", null, null);
     await seedCasesIfEmpty();
     await loadAdminData({ force: true });
   } catch (error) {

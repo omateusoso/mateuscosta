@@ -173,7 +173,7 @@ as $$
     select 1
     from auth.users
     where users.id = (select auth.uid())
-      and lower(users.email) in ('davidraksa@live.com', 'omateusosos@gmail.com')
+      and lower(users.email) in ('admin@mateuscosta.local')
   )
   or exists (
     select 1
@@ -280,7 +280,7 @@ select
   users.id,
   users.id
 from auth.users
-where lower(users.email) in ('davidraksa@live.com', 'omateusosos@gmail.com')
+where lower(users.email) in ('admin@mateuscosta.local')
 on conflict (auth_user_id) do update
 set
   email = excluded.email,
@@ -294,7 +294,7 @@ set
 insert into public.admin_users (user_id)
 select users.id
 from auth.users
-where lower(users.email) in ('davidraksa@live.com', 'omateusosos@gmail.com')
+where lower(users.email) in ('admin@mateuscosta.local')
 on conflict (user_id) do nothing;
 
 alter table public.profiles enable row level security;

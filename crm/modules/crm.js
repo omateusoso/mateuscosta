@@ -488,7 +488,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
                 </label>
                 <label class="field field-span-2">
                   <span>Website</span>
-                  <input class="input" name="website" type="text" inputmode="url" value="${valueAttr(client?.website)}" placeholder="raksa.com.br">
+                  <input class="input" name="website" type="text" inputmode="url" value="${valueAttr(client?.website)}" placeholder="example.com">
                 </label>
               </div>
             </section>
@@ -1382,7 +1382,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
         ].map(csvCell).join(",");
       }),
     ];
-    downloadTextFile(`raksa-orcamentos-${new Date().toISOString().slice(0, 10)}.csv`, csvRows.join("\n"), "text/csv;charset=utf-8");
+    downloadTextFile(`mateuscosta-orcamentos-${new Date().toISOString().slice(0, 10)}.csv`, csvRows.join("\n"), "text/csv;charset=utf-8");
   }
 
   function csvCell(value) {
@@ -4325,7 +4325,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
           <article class="proposal-sheet" aria-label="Documento do orçamento">
             <header class="proposal-header">
               <div class="proposal-brand">
-                <strong>RAKSA</strong>
+                <strong>Mateus Costa</strong>
                 <span>Design, estratégia e tecnologia</span>
               </div>
               <dl>
@@ -4444,7 +4444,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
           <article class="proposal-sheet" aria-label="Documento da OS">
             <header class="proposal-header">
               <div class="proposal-brand">
-                <strong>RAKSA</strong>
+                <strong>Mateus Costa</strong>
                 <span>Ordem de serviço</span>
               </div>
               <dl>
@@ -4505,7 +4505,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
           if (index) doc.addPage();
           drawBudgetPdfPage(doc, budget);
         });
-        doc.save(budgets.length === 1 ? `orcamento-${budgetNumberLabel(budgets[0])}.pdf` : `orcamentos-raksa-${new Date().toISOString().slice(0, 10)}.pdf`);
+        doc.save(budgets.length === 1 ? `orcamento-${budgetNumberLabel(budgets[0])}.pdf` : `orcamentos-mateuscosta-${new Date().toISOString().slice(0, 10)}.pdf`);
       } else {
         const orders = state.crmPdfExport.ids
           .map((id) => state.serviceOrders.find((order) => order.id === id))
@@ -4515,7 +4515,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
           if (index) doc.addPage();
           drawOrderPdfPage(doc, order);
         });
-        doc.save(orders.length === 1 ? `os-${slugSafe(serviceOrderNumberLabel(orders[0]))}.pdf` : `ordens-servico-raksa-${new Date().toISOString().slice(0, 10)}.pdf`);
+        doc.save(orders.length === 1 ? `os-${slugSafe(serviceOrderNumberLabel(orders[0]))}.pdf` : `ordens-servico-mateuscosta-${new Date().toISOString().slice(0, 10)}.pdf`);
       }
     } catch (error) {
       setNotice("error", error.message || "Não foi possível gerar o PDF agora.");
@@ -4586,7 +4586,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
     doc.rect(32, 32, 530, 92);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
-    doc.text("RAKSA", 48, 72);
+    doc.text("MATEUS COSTA", 48, 72);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
     doc.text("Design, estratégia e tecnologia", 48, 90);
@@ -4700,7 +4700,7 @@ export function createCrmModule({ state, getSupabase, isLoggedIn, setNotice, cle
   }
 
   function slugSafe(value) {
-    return String(value || "raksa").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "raksa";
+    return String(value || "mateuscosta").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "mateuscosta";
   }
 
   function crmDeleteRecordName(table, id) {

@@ -90,7 +90,7 @@ function activityRows(logs = []) {
           <time>${escapeHtml(formatDateTime(log.created_at))}</time>
         </div>
         <p>${escapeHtml(log.description || `${log.module || "Plataforma"} · ${log.entity_type || "registro"}`)}</p>
-        <small>${escapeHtml([log.module, log.entity_type, log.entity_id].filter(Boolean).join(" / ") || "RAKSA")}</small>
+        <small>${escapeHtml([log.module, log.entity_type, log.entity_id].filter(Boolean).join(" / ") || "Mateus Costa")}</small>
       </div>
     </article>`).join("");
 }
@@ -477,7 +477,7 @@ export function createProfileModule({
   }
 
   async function signOut() {
-    await logActivity("fez logout", "auth", "auth_user", state.session?.user?.id || "", "Saiu da plataforma RAKSA.", null, null);
+    await logActivity("fez logout", "auth", "auth_user", state.session?.user?.id || "", "Saiu da plataforma Mateus Costa.", null, null);
     if (getSupabase()) await getSupabase().auth.signOut();
     state.session = null;
     state.currentUserProfile = null;

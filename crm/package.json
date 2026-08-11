@@ -1,5 +1,5 @@
 {
-  "name": "lumodesign-crm",
+  "name": "mateuscosta-crm",
   "private": true,
   "scripts": {
     "build": "node build.mjs",

@@ -3,11 +3,10 @@ import { normalizeMediaUrl } from "@/lib/portfolio/media-url";
 
 describe("normalizeMediaUrl", () => {
   it.each([
-    "https://arteraksa.github.io/raksadesign/framerusercontent.com/images/example.jpg",
-    "/raksadesign/framerusercontent.com/images/example.jpg",
-    "raksadesign/framerusercontent.com/images/example.jpg",
-  ])("converts legacy Framer references: %s", (url) => {
-    expect(normalizeMediaUrl(url)).toBe("https://framerusercontent.com/images/example.jpg");
+    "https://framerusercontent.com/images/example.jpg",
+    "https://example.com/image.jpg",
+  ])("preserves configured media URLs: %s", (url) => {
+    expect(normalizeMediaUrl(url)).toBe(url);
   });
 
   it("keeps current media URLs unchanged", () => {

@@ -12,7 +12,7 @@ export function Contact() {
       <ScrollReveal>
         <h2 id="contact-title">
           <BlurText
-            text="Seu design pode ser mais inteligente com a gente."
+            text="Vamos criar algo relevante juntos."
             animateBy="words"
             delay={58}
             direction="top"
@@ -20,7 +20,7 @@ export function Contact() {
             className="contact-title__line"
           />
           <BlurText
-            text="Fale conosco:"
+            text="Entre em contato:"
             animateBy="words"
             delay={58}
             startDelay={420}
@@ -32,14 +32,14 @@ export function Contact() {
       </ScrollReveal>
       <MagicBentoGrid className="contact-grid" spotlightRadius={150} glowColor="132, 0, 255">
         <MagicBentoCard className="contact-card" clickEffect={false}>
-          <a href={`mailto:${siteConfig.email}`} className="contact-card__link">
+          <a href={siteConfig.email ? `mailto:${siteConfig.email}` : undefined} className="contact-card__link">
             <span className="contact-card__icon"><Mail aria-hidden="true" /></span>
             <span className="contact-card__title">Por E-Mail</span>
             <small>{siteConfig.email}</small>
           </a>
         </MagicBentoCard>
         <MagicBentoCard className="contact-card" clickEffect={false}>
-          <a href={siteConfig.whatsapp} target="_blank" rel="noreferrer" className="contact-card__link">
+          <a href={siteConfig.whatsapp || undefined} target={siteConfig.whatsapp ? "_blank" : undefined} rel={siteConfig.whatsapp ? "noreferrer" : undefined} className="contact-card__link">
             <span className="contact-card__icon"><MessageCircle aria-hidden="true" /></span>
             <span className="contact-card__title">No WhatsApp</span>
             <small>{siteConfig.phoneLabel}</small>
@@ -50,9 +50,9 @@ export function Contact() {
             <span className="contact-card__icon"><Globe aria-hidden="true" /></span>
             <span className="contact-card__title">Nas mídias</span>
             <div className="contact-socials" aria-label="Redes sociais">
-              <a className="button button--tertiary button--icon" href={siteConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><SocialIcon name="instagram" /></a>
-              <a className="button button--tertiary button--icon" href={siteConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><SocialIcon name="facebook" /></a>
-              <a className="button button--tertiary button--icon" href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><SocialIcon name="linkedin" /></a>
+              {siteConfig.social.instagram && <a className="button button--tertiary button--icon" href={siteConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><SocialIcon name="instagram" /></a>}
+              {siteConfig.social.facebook && <a className="button button--tertiary button--icon" href={siteConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><SocialIcon name="facebook" /></a>}
+              {siteConfig.social.linkedin && <a className="button button--tertiary button--icon" href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><SocialIcon name="linkedin" /></a>}
             </div>
           </div>
         </MagicBentoCard>

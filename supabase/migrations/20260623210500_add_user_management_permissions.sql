@@ -56,7 +56,7 @@ begin
   end if;
 
   if public.can_manage_users() then
-    if lower(old.email) in ('davidraksa@live.com', 'omateusosos@gmail.com')
+    if lower(old.email) in ('admin@mateuscosta.local')
       and (
         old.role is distinct from new.role
         or old.hierarchy_level is distinct from new.hierarchy_level

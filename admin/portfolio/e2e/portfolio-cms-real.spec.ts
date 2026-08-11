@@ -4,8 +4,8 @@ import path from "node:path";
 
 const cmsUrl = "http://localhost:5177/admin/portfolio/";
 const publicUrl = "http://localhost:4174/cases/";
-const supabaseUrl = "https://yzivkrotylwyglavtnho.supabase.co";
-const anonKey = "sb_publishable_99D42sJ3fT78ll6EzmIDqg_RWXrgtNn";
+const supabaseUrl = process.env.VITE_SUPABASE_URL ?? "";
+const anonKey = process.env.VITE_SUPABASE_ANON_KEY ?? "";
 const slug = `test-cms-e2e-${Date.now()}`;
 let caseId = "";
 let initialPublishedAt = "";
@@ -14,6 +14,7 @@ let initialVersion = 0;
 type Telemetry = ReturnType<typeof attachTelemetry>;
 
 test.describe.configure({ mode: "serial" });
+test.skip(!supabaseUrl || !anonKey, "Defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY para executar o E2E integrado.");
 
 test.describe("Portfolio CMS v2 real stability audit", () => {
   let telemetry: Telemetry;

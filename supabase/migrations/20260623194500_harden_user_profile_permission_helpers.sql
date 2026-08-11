@@ -14,7 +14,7 @@ as $$
     select 1
     from auth.users
     where users.id = (select auth.uid())
-      and lower(users.email) in ('davidraksa@live.com', 'omateusosos@gmail.com')
+      and lower(users.email) in ('admin@mateuscosta.local')
   )
   or exists (
     select 1
