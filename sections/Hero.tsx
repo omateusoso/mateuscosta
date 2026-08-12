@@ -9,7 +9,7 @@ export function Hero() {
       <div className="hero-content">
         <h1 className="hero-title" id="hero-title">
           <BlurText
-            text="Seu design pode"
+            text="Design inteligente"
             animateBy="words"
             delay={95}
             direction="top"
@@ -17,7 +17,7 @@ export function Hero() {
             className="hero-title__line"
           />
           <BlurText
-            text="ser mais inteligente"
+            text="focado em resultados"
             animateBy="words"
             delay={95}
             startDelay={285}
@@ -26,9 +26,9 @@ export function Hero() {
             className="hero-title__line"
           />
         </h1>
-        <div className="hero__description" aria-label="A LUMO oferece serviços de design com o que tem de mais novo no mercado. Venha inovar com a gente.">
+        <div className="hero__description" aria-label="Transformo problemas complexos de negócio em jornadas de usuário intuitivas, funcionais e escaláveis.">
           <BlurText
-            text="A LUMO oferece serviços de design com o que tem de mais novo"
+            text="Transformo problemas complexos de negócio em jornadas de"
             animateBy="words"
             delay={38}
             startDelay={650}
@@ -37,7 +37,7 @@ export function Hero() {
             className="hero__description-line"
           />
           <BlurText
-            text="no mercado. Venha inovar com a gente."
+            text="usuário intuitivas, funcionais e escaláveis."
             animateBy="words"
             delay={38}
             startDelay={1068}
@@ -51,7 +51,7 @@ export function Hero() {
           href={siteConfig.whatsapp}
           external
         >
-          Fazer um orçamento
+          Entrar em contato
         </SpecularButton>
         <div className="hero-client-logos">
           <ClientLogoLoop names={clientLogos} />

@@ -64,9 +64,9 @@ export function Services() {
       <ScrollReveal>
         <SectionHeading
           id="services-title"
-          label="Serviços"
-          title="Impulsionando marcas com design e estratégia digital"
-          description="Navegar no cenário digital é um desafio. Por isso, oferecemos um ecossistema completo de soluções de design e marketing, pensado para construir marcas fortes e gerar crescimento real."
+          label="Expertise"
+          title="Projetando Produtos Digitais Orientados a Resultados"
+          description="Construir produtos escaláveis exige mais do que boas interfaces; exige alinhar as necessidades do usuário aos objetivos de negócio. Minha atuação foca em transformar problemas complexos em jornadas intuitivas, ponta a ponta. Do discovery à validação, cada decisão de design é tomada para gerar valor real, usabilidade e impacto nas métricas da empresa."
         />
       </ScrollReveal>
       <div className="services-bento-scroll">

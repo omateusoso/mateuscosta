@@ -13,7 +13,7 @@ export function Header() {
           <Link href="/" className="site-header__logo"><Logo /></Link>
           <nav className="site-header__nav" aria-label="Navegação principal">
             <Link href="/" className="button button--tertiary">Home</Link>
-            <Link href="/#servicos" className="button button--tertiary">Serviços</Link>
+            <Link href="/#servicos" className="button button--tertiary">Expertise</Link>
             <Link href="/cases" className="button button--tertiary">Cases</Link>
             <Link href="/#faq" className="button button--tertiary">FAQ</Link>
           </nav>

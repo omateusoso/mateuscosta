@@ -12,8 +12,8 @@ export function Cases({ cases }: { cases: PortfolioCase[] }) {
         <SectionHeading
           id="cases-title"
           label="Portfólio"
-          title="O futuro do design em nossos cases"
-          description="Confira algumas de nossas criações"
+          title="O Futuro do Design em meus cases"
+          description="Confira algumas das minhas criações"
         />
       </ScrollReveal>
       <div className="cases-grid">

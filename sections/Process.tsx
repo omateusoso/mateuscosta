@@ -13,7 +13,7 @@ export function Process() {
           id="process-title"
           label="Diferenciais"
           title="Agilidade que transforma ideias em realidade"
-          description="Utilizamos IA para refinar conceitos e automatizar tarefas repetitivas, resultando em projetos de design de alta qualidade entregues com uma agilidade que surpreende."
+          description="Utilizo IA para refinar conceitos e automatizar tarefas repetitivas, resultando em projetos de design de alta qualidade entregues com uma agilidade que surpreende."
         />
       </ScrollReveal>
       <MagicBentoGrid className="process-grid" spotlightRadius={150} glowColor="132, 0, 255">
@@ -22,7 +22,7 @@ export function Process() {
             {index === 0 ? <Gem className="process-item__icon" aria-hidden="true" /> : null}
             {index === 4 ? <Scan className="process-item__icon" aria-hidden="true" /> : null}
             <h3>{item.title}</h3>
-            {item.description ? <p>{item.description}</p> : null}
+            {item.showDescription ? <p>{item.description}</p> : null}
           </MagicBentoCard>
         ))}
         <MagicBentoCard className="process-item process-item--metric" clickEffect={false}>
