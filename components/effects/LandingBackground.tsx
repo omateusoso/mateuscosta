@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 
 const LiquidEther = dynamic(() => import("@/components/effects/LiquidEther"), {
   ssr: false,
@@ -18,11 +18,11 @@ function supportsWebGL() {
 }
 
 export function LandingBackground() {
-  const enabled = useSyncExternalStore(
-    () => () => undefined,
-    () => supportsWebGL() && !matchMedia("(prefers-reduced-motion: reduce)").matches,
-    () => false,
-  );
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    setEnabled(supportsWebGL() && !matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   return (
     <div className="landing-background" aria-hidden="true">
