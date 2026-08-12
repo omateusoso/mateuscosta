@@ -9,7 +9,7 @@ import { getPortfolioCategories } from "@/lib/queries/portfolio-categories";
 
 export const metadata: Metadata = {
   title: "Cases",
-  description: "Conheça os projetos de design, branding e produto digital da LUMO.",
+  description: "Conheça os projetos de design, branding e produto digital de Mateus Costa.",
 };
 
 export default async function CasesPage() {
@@ -22,7 +22,7 @@ export default async function CasesPage() {
           <header className="listing-page__header">
             <p className="section-label">Portfólio</p>
             <BlurText
-              text="O futuro do design em nossos cases"
+              text="O futuro do design em meu portfólio"
               animateBy="words"
               delay={58}
               direction="top"

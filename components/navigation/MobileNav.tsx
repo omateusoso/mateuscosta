@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/content/site";
 
 const links = [
   ["Home", "/"],
-  ["Serviços", "/#servicos"],
+  ["Expertise", "/#servicos"],
   ["Cases", "/cases"],
   ["FAQ", "/#faq"],
 ];

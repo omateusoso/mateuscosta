@@ -1,10 +1,10 @@
 import { assetPath } from "@/lib/asset";
 
 export const siteConfig = {
-  name: "LUMO",
+  name: "Mateus Costa",
   description:
     "Design inteligente, estratégia digital e tecnologia para marcas que querem crescer.",
-  email: "contato@raksadesign.com",
+  email: "contato@mateuscosta.design",
   phoneLabel: "(51) 98115.9150",
   whatsapp: "https://wa.me/5551981159150",
   social: {
@@ -56,59 +56,61 @@ export const services = [
 export const processItems = [
   {
     title: "Qualidade Premium",
-    description: undefined,
+    description: "Designs de alto impacto que elevam sua marca e geram resultados",
+    showDescription: false,
   },
   {
     title: "AI Power",
     description: "Design acelerado e inovador com o poder da IA.",
+    showDescription: true,
   },
   {
     title: "Foco em Resultados",
     description: "Design que não só encanta, mas que impulsiona suas vendas e engajamento",
+    showDescription: true,
   },
   {
     title: "Inovação Constante",
     description: "Sempre à frente, explorando as últimas tendências e tecnologias de design",
+    showDescription: true,
   },
   {
     title: "Desburocratização",
-    description: undefined,
+    description: "Diga adeus aos processos lentos e complexos. Sua experiência é fluida",
+    showDescription: false,
   },
   {
     title: "Criatividade Otimizada",
     description: "IA potencializa as ideias. Visão humana garante o impacto e o resultado.",
+    showDescription: true,
   },
   {
-    title: "Custo-Benefício",
-    description: "Otimize seu investimento com soluções de design inteligentes e acessíveis",
+    title: "Estratégia",
+    description: "Minha experiência permite criar um ecossistema completo de soluções para marcas e projetos.",
+    showDescription: true,
   },
 ] as const;
 
 export const faqItems = [
   {
-    question: "A LUMO é uma agência de design? Qual a diferença?",
+    question: "Você está disponível para contratação ou projetos pontuais?",
     answer:
-      "Não. A LUMO é um design service. Nosso processo é otimizado por Inteligência Artificial para ser ágil, transparente e desburocratizado. Focamos em entregas rápidas e soluções estratégicas, eliminando custos elevados e lentidão.",
+      "Estou disponível tanto para contratação quanto para projetos mais pontuais.",
   },
   {
-    question: "Como a Inteligência Artificial é usada no processo de criação?",
+    question: "Quais são suas principais habilidades de design?",
     answer:
-      "A IA é nosso braço estratégico e criativo, mas a decisão final é sempre humana. Usamos tecnologia para explorar mais caminhos, otimizar processos internos e aumentar a eficácia do design. É a união da capacidade analítica da IA com a visão da nossa equipe.",
+      "Ofereço um portfólio completo para marcas brilharem no digital e no físico. Minhas principais habilidades incluem: Posts para redes sociais, Landing Pages de alta conversão, Materiais Gráficos diversos (flyers, banners, cards, etc.) e serviços de Diagramação e Editoração, mas, sendo meu foco principal o UI/UX Design",
   },
   {
-    question: "Quais serviços de design a LUMO oferece?",
+    question: "Como a Inteligência Artificial é usada no seu processo de criação?",
     answer:
-      "Oferecemos um portfólio completo para marcas no digital e no físico: social media, landing pages, UI/UX, materiais gráficos, identidade visual, diagramação, editoração e redesign estratégico.",
+      "A IA é meu braço estratégico e criativo, mas a decisão final é sempre minha e baseada na estratégia. Uso a IA para explorar mais caminhos criativos, otimizar processos internos e garantir que o design seja altamente eficaz. É a união da capacidade analítica da tecnologia com minha visão estratégica e expertise. Isso significa mais qualidade em menos tempo.",
   },
   {
-    question: "Como funciona o processo de contratação na LUMO?",
+    question: "Você trabalha de forma presencial ou remota?",
     answer:
-      "É simples: você apresenta sua necessidade, recebe uma proposta transparente e, após a aprovação, iniciamos a criação com agilidade e profissionalismo.",
-  },
-  {
-    question: "A LUMO atende clientes de qualquer lugar?",
-    answer:
-      "Sim. Somos um design service 100% digital e atendemos clientes do Brasil e do mundo. Nossa origem é Porto Alegre, mas nossa atuação não tem fronteiras.",
+      "Atualmente trabalho de forma remota, atendendo clientes e empresas.",
   },
 ] as const;
 
