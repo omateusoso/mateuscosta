@@ -9,7 +9,7 @@ import { getPortfolioCategories } from "@/lib/queries/portfolio-categories";
 
 export const metadata: Metadata = {
   title: "Cases",
-  description: "Conheça os projetos de design, branding e produto digital de Mateus Costa.",
+  description: "Conheça os projetos de design, branding e produto digital da LUMO.",
 };
 
 export default async function CasesPage() {

@@ -38,7 +38,7 @@ export function MobileNav() {
               <a key={href} href={href} className="button button--tertiary" onClick={() => setOpen(false)}>{label}</a>
             ))}
           </div>
-          <a className="button button--secondary mobile-nav__cta" href={siteConfig.whatsapp || "/#contato"} target={siteConfig.whatsapp ? "_blank" : undefined} rel={siteConfig.whatsapp ? "noreferrer" : undefined} onClick={() => setOpen(false)}>
+          <a className="button button--secondary mobile-nav__cta" href={siteConfig.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
             Entre em contato
           </a>
         </div>

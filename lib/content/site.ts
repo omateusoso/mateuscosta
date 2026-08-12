@@ -1,16 +1,16 @@
 import { assetPath } from "@/lib/asset";
 
 export const siteConfig = {
-  name: "Mateus Costa",
+  name: "LUMO",
   description:
-    "Portfólio de Mateus Costa: design, estratégia digital e tecnologia para produtos e marcas.",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
-  phoneLabel: process.env.NEXT_PUBLIC_CONTACT_PHONE_LABEL ?? "",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "",
+    "Design inteligente, estratégia digital e tecnologia para marcas que querem crescer.",
+  email: "contato@raksadesign.com",
+  phoneLabel: "(51) 98115.9150",
+  whatsapp: "https://wa.me/5551981159150",
   social: {
-    instagram: process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "",
-    facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "",
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "",
+    instagram: "https://www.instagram.com/raksadesign/",
+    facebook: "https://www.facebook.com/raksadesign",
+    linkedin: "https://www.linkedin.com/company/raksadesign",
   },
 } as const;
 
@@ -86,9 +86,9 @@ export const processItems = [
 
 export const faqItems = [
   {
-    question: "Qual é a abordagem de Mateus Costa em design?",
+    question: "A LUMO é uma agência de design? Qual a diferença?",
     answer:
-      "O trabalho une estratégia, design e tecnologia para criar experiências claras, úteis e consistentes.",
+      "Não. A LUMO é um design service. Nosso processo é otimizado por Inteligência Artificial para ser ágil, transparente e desburocratizado. Focamos em entregas rápidas e soluções estratégicas, eliminando custos elevados e lentidão.",
   },
   {
     question: "Como a Inteligência Artificial é usada no processo de criação?",
@@ -96,19 +96,19 @@ export const faqItems = [
       "A IA é nosso braço estratégico e criativo, mas a decisão final é sempre humana. Usamos tecnologia para explorar mais caminhos, otimizar processos internos e aumentar a eficácia do design. É a união da capacidade analítica da IA com a visão da nossa equipe.",
   },
   {
-    question: "Quais serviços estão no portfólio?",
+    question: "Quais serviços de design a LUMO oferece?",
     answer:
       "Oferecemos um portfólio completo para marcas no digital e no físico: social media, landing pages, UI/UX, materiais gráficos, identidade visual, diagramação, editoração e redesign estratégico.",
   },
   {
-    question: "Como funciona uma nova colaboração?",
+    question: "Como funciona o processo de contratação na LUMO?",
     answer:
       "É simples: você apresenta sua necessidade, recebe uma proposta transparente e, após a aprovação, iniciamos a criação com agilidade e profissionalismo.",
   },
   {
-    question: "Os projetos podem ser realizados remotamente?",
+    question: "A LUMO atende clientes de qualquer lugar?",
     answer:
-      "Sim. O portfólio e as colaborações podem ser desenvolvidos remotamente para pessoas e equipes em qualquer lugar.",
+      "Sim. Somos um design service 100% digital e atendemos clientes do Brasil e do mundo. Nossa origem é Porto Alegre, mas nossa atuação não tem fronteiras.",
   },
 ] as const;
 

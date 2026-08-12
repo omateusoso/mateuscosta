@@ -14,7 +14,11 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamic = "force-static";
 
 export async function generateStaticParams() {
-  return [];
+  return [
+    { slug: "impresul" },
+    { slug: "magnus" },
+    { slug: "tri-rs" }
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
