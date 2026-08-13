@@ -123,7 +123,6 @@ export const clientLogos = [
   "impresul",
   "hubee",
   "jaq",
-  "leylaw",
   "polvilho",
   "trirs",
   "ufrgs",
