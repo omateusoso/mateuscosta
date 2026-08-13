@@ -17,9 +17,31 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: { default: "LUMO — Design inteligente", template: "%s | LUMO" },
+  title: { default: "Matt Design — Design inteligente", template: "%s | Matt Design" },
   description: siteConfig.description,
-  openGraph: { title: "LUMO", description: siteConfig.description, type: "website", locale: "pt_BR" },
+  icons: {
+    icon: [
+      { url: "/favicon-light.png", type: "image/png", sizes: "64x64", media: "(prefers-color-scheme: light)" },
+      { url: "/favicon-dark.png", type: "image/png", sizes: "64x64", media: "(prefers-color-scheme: dark)" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon-light.png", type: "image/png", sizes: "180x180", media: "(prefers-color-scheme: light)" },
+      { url: "/apple-touch-icon-dark.png", type: "image/png", sizes: "180x180", media: "(prefers-color-scheme: dark)" },
+    ],
+  },
+  openGraph: {
+    title: "Matt Design — Design inteligente",
+    description: siteConfig.description,
+    type: "website",
+    locale: "pt_BR",
+    images: [{ url: "/social-preview.png", width: 1200, height: 630, alt: "Matt Design — Design inteligente focado em resultados" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Matt Design — Design inteligente",
+    description: siteConfig.description,
+    images: ["/social-preview.png"],
+  },
   robots: { index: true, follow: true },
 };
 
