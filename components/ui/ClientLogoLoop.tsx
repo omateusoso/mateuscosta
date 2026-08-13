@@ -10,6 +10,7 @@ const clientLogoAssets = {
   candy: assetPath("/images/hero-logos/candy.png"),
   capri: assetPath("/images/hero-logos/capri.png"),
   clickimpresso: assetPath("/images/hero-logos/clickimpresso.svg"),
+  hubee: assetPath("/images/hero-logos/hubee.svg"),
   impresul: assetPath("/images/hero-logos/impresul.svg"),
   jaq: assetPath("/images/hero-logos/jaq.svg"),
   leylaw: assetPath("/images/hero-logos/leylaw.svg"),
@@ -58,7 +59,7 @@ export function ClientLogoLoop({ names }: { names: readonly string[] }) {
 
   return (
     <LogoLoop
-      ariaLabel="Algumas marcas que confiam na LUMO"
+      ariaLabel="Algumas marcas que confiam na Matt Design"
       fadeOut
       fadeOutColor="#05020d"
       gap={101}
