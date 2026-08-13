@@ -3,17 +3,19 @@ import { BlurText } from "@/components/motion/BlurText";
 export function SectionHeading({
   id,
   label,
+  labelIcon,
   title,
   description,
 }: {
   id: string;
   label?: string;
+  labelIcon?: "expertise" | "cases";
   title: string;
   description?: string;
 }) {
   return (
     <header className="section-heading">
-      {label ? <p className="section-label">{label}</p> : null}
+      {label ? <p className={["section-label", labelIcon ? `section-label--${labelIcon}` : ""].filter(Boolean).join(" ")}>{label}</p> : null}
       <BlurText
         text={title}
         animateBy="words"

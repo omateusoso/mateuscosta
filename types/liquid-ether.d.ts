@@ -14,6 +14,7 @@ declare module "@/components/effects/LiquidEther" {
     autoDemo?: boolean;
     autoSpeed?: number;
     autoIntensity?: number;
+    interactive?: boolean;
     takeoverDuration?: number;
     autoResumeDelay?: number;
     autoRampDuration?: number;

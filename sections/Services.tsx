@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import { useId, type CSSProperties } from "react";
+import { ArrowRight } from "lucide-react";
+import { useId, useState, type CSSProperties } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MagicBentoCard } from "@/components/ui/MagicBentoCard";
 import { Section } from "@/components/ui/Section";
@@ -59,12 +62,20 @@ function ServiceHoverLines({
 }
 
 export function Services() {
+  const [activeService, setActiveService] = useState<number | null>(null);
+
+  const toggleService = (index: number) => {
+    if (!matchMedia("(max-width: 809px)").matches) return;
+    setActiveService((current) => current === index ? null : index);
+  };
+
   return (
     <Section id="servicos" labelledBy="services-title">
       <ScrollReveal>
         <SectionHeading
           id="services-title"
           label="Expertise"
+          labelIcon="expertise"
           title="Projetando Produtos Digitais Orientados a Resultados"
           description="Construir produtos escaláveis exige mais do que boas interfaces; exige alinhar as necessidades do usuário aos objetivos de negócio. Minha atuação foca em transformar problemas complexos em jornadas intuitivas, ponta a ponta. Do discovery à validação, cada decisão de design é tomada para gerar valor real, usabilidade e impacto nas métricas da empresa."
         />
@@ -72,7 +83,15 @@ export function Services() {
       <div className="services-bento-scroll">
         <div className="services-grid">
           {services.map((service, index) => (
-            <MagicBentoCard className={`service-card service-card--${index + 1}`} delay={index * 0.035} clickEffect={false} key={service.title} tabIndex={0}>
+            <MagicBentoCard
+              active={activeService === index}
+              className={`service-card service-card--${index + 1}`}
+              clickEffect={false}
+              delay={index * 0.035}
+              key={service.title}
+              onClick={() => toggleService(index)}
+              tabIndex={0}
+            >
               <Image src={service.image} alt="" fill sizes="(max-width: 809px) 100vw, (max-width: 1279px) 50vw, 40vw" />
               <div className="service-card__shade" />
               <div className="service-card__lines" aria-hidden="true">
@@ -101,6 +120,17 @@ export function Services() {
               <div className="service-card__content">
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
+                <button
+                  aria-expanded={activeService === index}
+                  className="button button--tertiary service-card__more"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    toggleService(index);
+                  }}
+                  type="button"
+                >
+                  Saiba mais <ArrowRight aria-hidden="true" />
+                </button>
               </div>
             </MagicBentoCard>
           ))}

@@ -116,3 +116,10 @@
 @media (prefers-reduced-motion: reduce) {
   .logoloop__track { transform: translate3d(0, 0, 0) !important; }
 }
+
+@media (max-width: 809px) {
+  .hero-client-logos .logoloop {
+    --logoloop-gap: 81px !important;
+    --logoloop-logoHeight: 16px !important;
+  }
+}

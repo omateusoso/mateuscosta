@@ -18,6 +18,7 @@ export default function LiquidEther({
   autoDemo = true,
   autoSpeed = 0.5,
   autoIntensity = 2.2,
+  interactive = true,
   takeoverDuration = 0.25,
   autoResumeDelay = 1000,
   autoRampDuration = 0.6
@@ -86,7 +87,14 @@ export default function LiquidEther({
         this.container = container;
         this.pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
         this.resize();
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        // Keep the decorative background on the integrated/low-power GPU when
+        // available. Antialiasing is unnecessary for this full-viewport fluid
+        // layer and can multiply GPU memory pressure on development machines.
+        this.renderer = new THREE.WebGLRenderer({
+          antialias: false,
+          alpha: true,
+          powerPreference: 'low-power',
+        });
         this.renderer.autoClear = false;
         this.renderer.setClearColor(new THREE.Color(0x000000), 0);
         this.renderer.setClearAlpha(0);
@@ -139,19 +147,21 @@ export default function LiquidEther({
         this._onTouchEnd = this.onTouchEnd.bind(this);
         this._onDocumentLeave = this.onDocumentLeave.bind(this);
       }
-      init(container) {
+      init(container, interactive) {
         this.container = container;
         this.docTarget = container.ownerDocument || null;
         const defaultView =
           (this.docTarget && this.docTarget.defaultView) || (typeof window !== 'undefined' ? window : null);
         if (!defaultView) return;
-        this.listenerTarget = defaultView;
-        this.listenerTarget.addEventListener('mousemove', this._onMouseMove);
-        this.listenerTarget.addEventListener('touchstart', this._onTouchStart, { passive: true });
-        this.listenerTarget.addEventListener('touchmove', this._onTouchMove, { passive: true });
-        this.listenerTarget.addEventListener('touchend', this._onTouchEnd);
-        if (this.docTarget) {
-          this.docTarget.addEventListener('mouseleave', this._onDocumentLeave);
+        if (interactive) {
+          this.listenerTarget = defaultView;
+          this.listenerTarget.addEventListener('mousemove', this._onMouseMove);
+          this.listenerTarget.addEventListener('touchstart', this._onTouchStart, { passive: true });
+          this.listenerTarget.addEventListener('touchmove', this._onTouchMove, { passive: true });
+          this.listenerTarget.addEventListener('touchend', this._onTouchEnd);
+          if (this.docTarget) {
+            this.docTarget.addEventListener('mouseleave', this._onDocumentLeave);
+          }
         }
       }
       dispose() {
@@ -927,7 +937,7 @@ export default function LiquidEther({
       constructor(props) {
         this.props = props;
         Common.init(props.$wrapper);
-        Mouse.init(props.$wrapper);
+        Mouse.init(props.$wrapper, props.interactive);
         Mouse.autoIntensity = props.autoIntensity;
         Mouse.takeoverDuration = props.takeoverDuration;
         this.lastUserInteraction = performance.now();
@@ -1013,6 +1023,7 @@ export default function LiquidEther({
       autoDemo,
       autoSpeed,
       autoIntensity,
+      interactive,
       takeoverDuration,
       autoResumeDelay,
       autoRampDuration
@@ -1109,6 +1120,7 @@ export default function LiquidEther({
     autoDemo,
     autoSpeed,
     autoIntensity,
+    interactive,
     takeoverDuration,
     autoResumeDelay,
     autoRampDuration
@@ -1159,6 +1171,7 @@ export default function LiquidEther({
     autoDemo,
     autoSpeed,
     autoIntensity,
+    interactive,
     takeoverDuration,
     autoResumeDelay,
     autoRampDuration
