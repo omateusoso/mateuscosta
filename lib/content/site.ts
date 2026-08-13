@@ -5,8 +5,8 @@ export const siteConfig = {
   description:
     "Design inteligente, estratégia digital e tecnologia para marcas que querem crescer.",
   email: "contato@mateuscosta.design",
-  phoneLabel: "(51) 98115.9150",
-  whatsapp: "https://wa.me/5551981159150",
+  phoneLabel: "+55 51 99384-0288",
+  whatsapp: "https://wa.me/5551993840288",
   social: {
     instagram: "https://www.instagram.com/raksadesign/",
     facebook: "https://www.facebook.com/raksadesign",
@@ -121,6 +121,7 @@ export const clientLogos = [
   "capri",
   "clickimpresso",
   "impresul",
+  "hubee",
   "jaq",
   "leylaw",
   "polvilho",
