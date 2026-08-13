@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Mateus Costa",
   description:
     "Design inteligente, estratégia digital e tecnologia para marcas que querem crescer.",
-  email: "contato@mateuscosta.design",
+  email: "mtscostab@gmail.com",
   phoneLabel: "+55 51 99384-0288",
   whatsapp: "https://wa.me/5551993840288",
   social: {
