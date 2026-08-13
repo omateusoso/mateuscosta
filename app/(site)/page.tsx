@@ -5,6 +5,7 @@ import { Process } from "@/sections/Process";
 import { Faq } from "@/sections/Faq";
 import { Contact } from "@/sections/Contact";
 import { LandingBackground } from "@/components/effects/LandingBackground";
+import { HomeHashScroll } from "@/components/navigation/HomeHashScroll";
 import { getFeaturedCases } from "@/lib/queries/cases";
 
 export default async function HomePage() {
@@ -18,6 +19,7 @@ export default async function HomePage() {
       <Process />
       <Faq />
       <Contact />
+      <HomeHashScroll />
     </main>
   );
 }

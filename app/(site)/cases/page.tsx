@@ -20,7 +20,7 @@ export default async function CasesPage() {
       <Container>
         <ScrollReveal>
           <header className="listing-page__header">
-            <p className="section-label">Portfólio</p>
+            <p className="section-label section-label--cases">Portfólio</p>
             <BlurText
               text="O futuro do design em meu portfólio"
               animateBy="words"

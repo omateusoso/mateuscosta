@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ModularContent } from "@/components/content/ModularContent";
 import type { PortfolioCase, PortfolioCaseMedia } from "@/lib/supabase/database.types";
 import { getPublishedCaseResolution, getPublishedCases } from "@/lib/queries/cases";
@@ -56,6 +56,24 @@ function CaseDirection({ item, direction }: { item?: PortfolioCase; direction: "
   );
 }
 
+function MobileCaseNavigation({ previousCase, nextCase, title }: { previousCase?: PortfolioCase; nextCase?: PortfolioCase; title: string }) {
+  return (
+    <div className="case-study__mobile-navigation" aria-label="Navegação entre cases">
+      {previousCase ? (
+        <Link className="case-study__mobile-direction" href={`/cases/${previousCase.slug}`} aria-label={`Case anterior: ${previousCase.title}`}>
+          <ChevronLeft aria-hidden="true" size={16} />
+        </Link>
+      ) : <span className="case-study__mobile-direction" aria-hidden="true" />}
+      <h6>{title}</h6>
+      {nextCase ? (
+        <Link className="case-study__mobile-direction" href={`/cases/${nextCase.slug}`} aria-label={`Próximo case: ${nextCase.title}`}>
+          <ChevronRight aria-hidden="true" size={16} />
+        </Link>
+      ) : <span className="case-study__mobile-direction" aria-hidden="true" />}
+    </div>
+  );
+}
+
 export default async function CaseDetailPage({ params }: Props) {
   const { slug } = await params;
   const [{ item, legacySlug }, publishedCases] = await Promise.all([getPublishedCaseResolution(slug), getPublishedCases()]);
@@ -70,6 +88,7 @@ export default async function CaseDetailPage({ params }: Props) {
     <main id="conteudo" className="case-study-page">
       <aside className="case-study__sidebar" aria-label={`Informações sobre ${item.title}`}>
         <section className="case-study__details">
+          <MobileCaseNavigation previousCase={previousCase} nextCase={nextCase} title={item.title} />
           <div className="case-study__title-row">
             <Link className="case-study__back" href="/cases" aria-label="Voltar para a página de cases"><ChevronLeft aria-hidden="true" size={16} /></Link>
             <h6>{item.title}</h6>

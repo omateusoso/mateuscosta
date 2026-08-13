@@ -86,6 +86,8 @@ export function MagicBentoCard({
   enableBorderGlow = true,
   glowColor = "132, 0, 255",
   tabIndex,
+  onClick,
+  active = false,
 }: {
   children: ReactNode;
   className?: string;
@@ -94,6 +96,8 @@ export function MagicBentoCard({
   enableBorderGlow?: boolean;
   glowColor?: string;
   tabIndex?: number;
+  onClick?: () => void;
+  active?: boolean;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -130,6 +134,8 @@ export function MagicBentoCard({
       className={`${className} magic-bento-card${enableBorderGlow ? " magic-bento-card--border-glow" : ""}`}
       style={{ "--glow-color": glowColor } as React.CSSProperties}
       tabIndex={tabIndex}
+      data-active={active || undefined}
+      onClick={onClick}
     >
       {children}
     </div>

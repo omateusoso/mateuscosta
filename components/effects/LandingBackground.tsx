@@ -19,9 +19,20 @@ function supportsWebGL() {
 
 export function LandingBackground() {
   const [enabled, setEnabled] = useState(false);
+  const [interactive, setInteractive] = useState(false);
 
   useEffect(() => {
-    setEnabled(supportsWebGL() && !matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const pointerQuery = matchMedia("(hover: hover) and (pointer: fine)");
+    const updateInteraction = () => setInteractive(pointerQuery.matches);
+    const frame = requestAnimationFrame(() => {
+      setEnabled(supportsWebGL() && !matchMedia("(prefers-reduced-motion: reduce)").matches);
+      updateInteraction();
+    });
+    pointerQuery.addEventListener("change", updateInteraction);
+    return () => {
+      cancelAnimationFrame(frame);
+      pointerQuery.removeEventListener("change", updateInteraction);
+    };
   }, []);
 
   return (
@@ -35,9 +46,10 @@ export function LandingBackground() {
           colors={["#2e0b6a", "#9876e8", "#9876e8"]}
           autoDemo
           autoSpeed={0.5}
-          autoIntensity={2.2}
+          autoIntensity={1.4}
+          interactive={interactive}
           isBounce={false}
-          resolution={0.5}
+          resolution={0.25}
           className="landing-background__liquid"
         />
       ) : null}
