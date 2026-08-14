@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { PointerGlow } from "@/components/effects/PointerGlow";
 import { siteConfig } from "@/lib/content/site";
+import { cookies } from "next/headers";
+import { isLocale } from "@/lib/i18n";
 
 const satoshi = localFont({
   variable: "--font-satoshi",
@@ -51,11 +53,13 @@ export const viewport: Viewport = {
   themeColor: "#05020d",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const selected = (await cookies()).get("portfolio_locale")?.value;
+  const locale = isLocale(selected ?? "") ? selected : "pt-br";
   return (
-    <html lang="pt-BR" className={satoshi.variable}>
+    <html lang={locale === "pt-br" ? "pt-BR" : locale} className={satoshi.variable}>
       <body>
-        <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+        <a className="skip-link" href="#conteudo">{locale === "en" ? "Skip to content" : locale === "es" ? "Saltar al contenido" : "Pular para o conteúdo"}</a>
         <PointerGlow />
         {children}
       </body>

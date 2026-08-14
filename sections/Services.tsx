@@ -8,6 +8,8 @@ import { MagicBentoCard } from "@/components/ui/MagicBentoCard";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { services } from "@/lib/content/site";
+import { localizedLandingContent } from "@/lib/content/localized-landing";
+import { copy, type Locale } from "@/lib/i18n";
 
 const HOVER_FILL_STRIPES = Array.from({ length: 18 });
 const FIXED_LINE_X = [10, 20, 30, 40, 50, 60, 70, 80, 90];
@@ -61,7 +63,9 @@ function ServiceHoverLines({
   );
 }
 
-export function Services() {
+export function Services({ locale }: { locale: Locale }) {
+  const text = copy[locale];
+  const serviceContent = localizedLandingContent[locale].services;
   const [activeService, setActiveService] = useState<number | null>(null);
 
   const toggleService = (index: number) => {
@@ -74,10 +78,10 @@ export function Services() {
       <ScrollReveal>
         <SectionHeading
           id="services-title"
-          label="Expertise"
+          label={text.labels.expertise}
           labelIcon="expertise"
-          title="Projetando Produtos Digitais Orientados a Resultados"
-          description="Construir produtos escaláveis exige mais do que boas interfaces; exige alinhar as necessidades do usuário aos objetivos de negócio. Minha atuação foca em transformar problemas complexos em jornadas intuitivas, ponta a ponta. Do discovery à validação, cada decisão de design é tomada para gerar valor real, usabilidade e impacto nas métricas da empresa."
+          title={text.services.title}
+          description={text.services.description}
         />
       </ScrollReveal>
       <div className="services-bento-scroll">
@@ -118,8 +122,8 @@ export function Services() {
                 ))}
               </div>
               <div className="service-card__content">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                <h3>{serviceContent[index]?.title ?? service.title}</h3>
+                <p>{serviceContent[index]?.description ?? service.description}</p>
                 <button
                   aria-expanded={activeService === index}
                   className="button button--tertiary service-card__more"
@@ -129,7 +133,7 @@ export function Services() {
                   }}
                   type="button"
                 >
-                  Saiba mais <ArrowRight aria-hidden="true" />
+                  {text.services.more} <ArrowRight aria-hidden="true" />
                 </button>
               </div>
             </MagicBentoCard>

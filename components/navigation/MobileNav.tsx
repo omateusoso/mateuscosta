@@ -2,15 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/lib/content/site";
+import { copy, type Locale, withLocale } from "@/lib/i18n";
 
-const links = [
-  ["Home", "/"],
-  ["Expertise", "/#servicos"],
-  ["Cases", "/cases"],
-  ["FAQ", "/#faq"],
-];
-
-export function MobileNav() {
+export function MobileNav({ locale }: { locale: Locale }) {
+  const text = copy[locale];
+  const links = [[text.nav.home, withLocale(locale)], [text.nav.expertise, withLocale(locale, "/#servicos")], [text.nav.cases, withLocale(locale, "/cases")], [text.nav.faq, withLocale(locale, "/#faq")]];
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!open) return;
@@ -39,7 +35,7 @@ export function MobileNav() {
             ))}
           </div>
           <a className="button button--secondary mobile-nav__cta" href={siteConfig.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
-            Entre em contato
+            {text.nav.contact}
           </a>
         </div>
       </nav>

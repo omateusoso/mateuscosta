@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import { requireSupabaseConfig } from "@/lib/supabase/config";
 import type { PortfolioCase } from "@/lib/supabase/database.types";
+import type { Locale } from "@/lib/i18n";
 import { normalizeMediaUrl } from "@/lib/portfolio/media-url";
 
 export const CASES_CACHE_TAG = "portfolio-cases";
@@ -13,7 +14,7 @@ function coverUrl(item: PortfolioCase, baseUrl: string) {
   return `${baseUrl}/storage/v1/object/public/${item.cover_storage_bucket}/${item.cover_storage_path}`;
 }
 
-async function fetchCases(query: string): Promise<PortfolioCase[]> {
+async function fetchCases(query: string, locale: Locale = "pt-br"): Promise<PortfolioCase[]> {
   const config = requireSupabaseConfig();
 
   const response = await fetch(
@@ -34,8 +35,27 @@ async function fetchCases(query: string): Promise<PortfolioCase[]> {
   }
 
   const data = (await response.json()) as PortfolioCase[];
+  const translations = locale === "pt-br" || !data.length
+    ? []
+    : await (async () => {
+      const ids = data.map((item) => item.id).join(",");
+      const translationResponse = await fetch(
+        `${config.url}/rest/v1/portfolio_case_translations?select=*&locale=eq.${locale}&status=eq.published&case_id=in.(${ids})`,
+        { headers: { apikey: config.key, Authorization: `Bearer ${config.key}` }, cache: "force-cache", next: { tags: [CASES_CACHE_TAG] } },
+      );
+      if (!translationResponse.ok) throw new Error("Não foi possível carregar as traduções dos cases.");
+      return await translationResponse.json() as Array<Record<string, unknown>>;
+    })();
+  const translationsByCaseId = new Map(translations.map((translation) => [String(translation.case_id), translation]));
   return data.map((item) => ({
     ...item,
+    ...(translationsByCaseId.get(item.id) ?? {}),
+    id: item.id,
+    categories: item.categories,
+    external_url: item.external_url,
+    external_link_enabled: item.external_link_enabled,
+    cover_storage_bucket: item.cover_storage_bucket,
+    cover_storage_path: item.cover_storage_path,
     cover_url: coverUrl(item, config.url),
     portfolio_case_media: item.portfolio_case_media?.map((media) => ({
       ...media,
@@ -44,27 +64,30 @@ async function fetchCases(query: string): Promise<PortfolioCase[]> {
   }));
 }
 
-export const getPublishedCases = cache(async () =>
+export const getPublishedCases = cache(async (locale: Locale = "pt-br") =>
   fetchCases(
     "select=*&status=eq.published&deleted_at=is.null&order=portfolio_order.asc.nullslast,published_at.desc.nullslast",
+    locale,
   ),
 );
 
-export const getFeaturedCases = cache(async () => {
+export const getFeaturedCases = cache(async (locale: Locale = "pt-br") => {
   return fetchCases(
     "select=*&status=eq.published&deleted_at=is.null&featured_on_home=eq.true&order=home_order.asc.nullslast,published_at.desc.nullslast&limit=9",
+    locale,
   );
 });
 
-export const getPublishedCaseBySlug = cache(async (slug: string) => {
+export const getPublishedCaseBySlug = cache(async (slug: string, locale: Locale = "pt-br") => {
   const cases = await fetchCases(
     `select=*,portfolio_case_media(*)&status=eq.published&deleted_at=is.null&slug=eq.${encodeURIComponent(slug)}&limit=1`,
+    locale,
   );
   return cases.find((item) => item.slug === slug) ?? null;
 });
 
-export const getPublishedCaseResolution = cache(async (slug: string) => {
-  const current = await getPublishedCaseBySlug(slug);
+export const getPublishedCaseResolution = cache(async (slug: string, locale: Locale = "pt-br") => {
+  const current = await getPublishedCaseBySlug(slug, locale);
   if (current) return { item: current, legacySlug: false };
 
   const config = requireSupabaseConfig();
@@ -83,6 +106,7 @@ export const getPublishedCaseResolution = cache(async (slug: string) => {
 
   const matches = await fetchCases(
     `select=*,portfolio_case_media(*)&status=eq.published&deleted_at=is.null&id=eq.${encodeURIComponent(caseId)}&limit=1`,
+    locale,
   );
   return { item: matches[0] ?? null, legacySlug: Boolean(matches[0]) };
 });

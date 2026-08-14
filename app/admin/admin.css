@@ -1,6 +1,6 @@
 .admin-shell { min-height: 100vh; background: #070510; color: #f8f7fb; }
 .admin-page { width: min(calc(100% - 3rem), 86rem); margin-inline: auto; padding: 3.5rem 0 8rem; }
-.admin-topbar, .admin-editor__header { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 3rem; }
+.admin-topbar, .admin-editor__header { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 3rem; }.admin-language-versions { display: flex; flex-wrap: wrap; gap: .5rem; margin: -1.5rem 0 1.25rem; }.admin-language-versions a { border: 1px solid var(--admin-border); border-radius: 999px; padding: .5rem .8rem; color: var(--admin-text-muted); font-size: .82rem; text-decoration: none; }.admin-language-versions a.active { border-color: #a99cff; background: rgba(126,67,255,.16); color: #fff; }
 .admin-topbar h1, .admin-editor h1 { margin: 0; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; letter-spacing: -.04em; }
 .admin-topbar p, .admin-editor header p { color: var(--color-ink-muted); }
 .admin-topbar__actions { display: flex; align-items: center; gap: .75rem; }

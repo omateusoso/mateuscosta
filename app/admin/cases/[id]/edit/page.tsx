@@ -9,7 +9,7 @@ import { SaveFeedback } from "../../SaveFeedback";
 import { archiveCaseAction, createCategoryAction, moveCaseToTrashAction, restoreCaseAction, saveCaseAction } from "../../actions";
 import { getPortfolioCategories } from "@/lib/queries/portfolio-categories";
 
-type Props = { params: Promise<{ id: string }>; searchParams: Promise<{ notice?: string }> };
+type Props = { params: Promise<{ id: string }>; searchParams: Promise<{ notice?: string; language?: "pt-br" | "en" | "es" }> };
 
 async function previewUrl(
   supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"],
@@ -43,11 +43,19 @@ export default async function EditCasePage({ params, searchParams }: Props) {
   })));
   const coverPreviewUrl = item.cover_url || await previewUrl(supabase, item.cover_storage_bucket, item.cover_storage_path);
   const [categories, query] = await Promise.all([getPortfolioCategories(), searchParams]);
+  const language = query.language === "en" || query.language === "es" ? query.language : "pt-br";
+  const { data: translation, error: translationError } = language === "pt-br"
+    ? { data: null, error: null }
+    : await supabase.from("portfolio_case_translations").select("*").eq("case_id", item.id).eq("locale", language).maybeSingle();
+  if (translationError && !/does not exist|42P01/i.test(translationError.message)) throw translationError;
+  const editorItem = translation ? { ...item, ...translation, id: item.id, categories: item.categories, external_url: item.external_url, external_link_enabled: item.external_link_enabled, cover_url: item.cover_url, cover_storage_bucket: item.cover_storage_bucket, cover_storage_path: item.cover_storage_path, featured_on_home: item.featured_on_home, home_order: item.home_order, portfolio_order: item.portfolio_order, published_at: item.published_at, archived_at: item.archived_at, deleted_at: item.deleted_at } : item;
   return (
     <main className="admin-page admin-editor">
       <header className="admin-editor__header"><div><h1>{item.title}</h1><p>Versão {item.version} · {item.status === "published" ? "Publicado" : item.status === "archived" ? "Arquivado" : "Rascunho"}</p></div><div className="admin-editor__header-actions"><ConfirmCaseAction id={item.id} action={item.status === "archived" ? restoreCaseAction : archiveCaseAction} label={item.status === "archived" ? <><RotateCcw size={16} /> Restaurar como rascunho</> : <><Archive size={16} /> Arquivar</>} title={item.status === "archived" ? "Restaurar como rascunho?" : "Arquivar case?"} description={item.status === "archived" ? "O case voltará para a lista ativa como rascunho." : "O case sairá da lista ativa e poderá ser restaurado depois."} className="button button--secondary" /><ConfirmCaseAction id={item.id} action={moveCaseToTrashAction} label={<><Trash2 size={16} /> Excluir</>} title="Mover case para a lixeira?" description="Ele ficará disponível para restauração por 30 dias." className="admin-danger-button" /></div></header>
+      <nav className="admin-language-versions" aria-label="Versões de idioma"><a className={language === "pt-br" ? "active" : ""} href={`/admin/cases/${item.id}/edit?language=pt-br`}>🇧🇷 Português</a><a className={language === "en" ? "active" : ""} href={`/admin/cases/${item.id}/edit?language=en`}>🇺🇸 English</a><a className={language === "es" ? "active" : ""} href={`/admin/cases/${item.id}/edit?language=es`}>🇪🇸 Español</a></nav>
+      {language !== "pt-br" ? <p className="admin-notice">Edite esta versão separadamente. Ela mantém imagens e categorias do case-base, mas salva título, slug, conteúdo e SEO no idioma selecionado.</p> : null}
       {query.notice === "saved" || query.notice === "published" ? <SaveFeedback notice={query.notice} /> : null}
-      <CaseForm item={item} media={media} coverPreviewUrl={coverPreviewUrl} categoryOptions={categories} action={saveCaseAction} createCategoryAction={createCategoryAction} />
+      <CaseForm item={editorItem} media={media} coverPreviewUrl={coverPreviewUrl} categoryOptions={categories} action={saveCaseAction} createCategoryAction={createCategoryAction} locale={language} />
     </main>
   );
 }

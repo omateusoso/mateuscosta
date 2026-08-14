@@ -266,6 +266,27 @@ export async function saveCaseAction(formData: FormData): Promise<{ caseId: stri
       .eq("is_active", true);
     if (categoriesError) throw categoriesError;
     const input = caseInputFromFormData(formData, (categoryRows ?? []).map((row) => row.name));
+    const locale = formData.get("locale");
+    if (locale === "en" || locale === "es") {
+      if (!input.id) throw new Error("Salve primeiro a versão em português antes de criar uma tradução.");
+      const { error } = await supabase.from("portfolio_case_translations").upsert({
+        case_id: input.id,
+        locale,
+        slug: input.slug.normalize("NFC"),
+        title: input.title,
+        excerpt: input.excerpt,
+        content_html: input.content_html,
+        content_json: richTextDocumentJson(input.content_html),
+        seo_title: input.seo_title,
+        seo_description: input.seo_description,
+        external_link_label: input.external_link_label,
+        status: input.status === "published" ? "published" : "draft",
+      }, { onConflict: "case_id,locale" });
+      if (error) throw error;
+      revalidateTag(CASES_CACHE_TAG, "max");
+      portfolioPathsForSlugs(input.slug).forEach((path) => revalidatePath(path));
+      return { caseId: input.id, notice: input.status === "published" ? "published" : "saved" };
+    }
     const mediaManifest = parseMediaManifest(formData);
     const coverManifest = parseCoverManifest(formData);
     const id = input.id;
