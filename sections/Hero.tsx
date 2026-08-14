@@ -2,14 +2,16 @@ import { BlurText } from "@/components/motion/BlurText";
 import { SpecularButton } from "@/components/ui/SpecularButton";
 import { ClientLogoLoop } from "@/components/ui/ClientLogoLoop";
 import { clientLogos, siteConfig } from "@/lib/content/site";
+import { copy, type Locale } from "@/lib/i18n";
 
-export function Hero() {
+export function Hero({ locale }: { locale: Locale }) {
+  const text = copy[locale].hero;
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-content">
         <h1 className="hero-title" id="hero-title">
           <BlurText
-            text="Design inteligente"
+            text={text.title[0]}
             animateBy="words"
             delay={95}
             direction="top"
@@ -17,7 +19,7 @@ export function Hero() {
             className="hero-title__line"
           />
           <BlurText
-            text="focado em resultados"
+            text={text.title[1]}
             animateBy="words"
             delay={95}
             startDelay={285}
@@ -26,9 +28,9 @@ export function Hero() {
             className="hero-title__line"
           />
         </h1>
-        <div className="hero__description" aria-label="Transformo problemas complexos de negócio em jornadas de usuário intuitivas, funcionais e escaláveis.">
+        <div className="hero__description" aria-label={text.description.join(" ")}>
           <BlurText
-            text="Transformo problemas complexos de negócio em jornadas de"
+            text={text.description[0]}
             animateBy="words"
             delay={38}
             startDelay={650}
@@ -37,7 +39,7 @@ export function Hero() {
             className="hero__description-line"
           />
           <BlurText
-            text="usuário intuitivas, funcionais e escaláveis."
+            text={text.description[1]}
             animateBy="words"
             delay={38}
             startDelay={1068}
@@ -51,7 +53,7 @@ export function Hero() {
           href={siteConfig.whatsapp}
           external
         >
-          Entrar em contato
+          {text.contact}
         </SpecularButton>
         <div className="hero-client-logos">
           <ClientLogoLoop names={clientLogos} />

@@ -13,12 +13,12 @@ export default async function HomePage() {
   return (
     <main id="conteudo" className="home-page site-background-page">
       <LandingBackground />
-      <Hero />
-      <Services />
-      <Cases cases={cases} />
-      <Process />
-      <Faq />
-      <Contact />
+      <Hero locale="pt-br" />
+      <Services locale="pt-br" />
+      <Cases cases={cases} locale="pt-br" />
+      <Process locale="pt-br" />
+      <Faq locale="pt-br" />
+      <Contact locale="pt-br" />
       <HomeHashScroll />
     </main>
   );

@@ -37,7 +37,7 @@ export default async function CasesPage() {
             />
           </header>
         </ScrollReveal>
-        <CaseFilters cases={cases} categories={categories} />
+        <CaseFilters cases={cases} categories={categories} locale="pt-br" />
       </Container>
     </main>
   );

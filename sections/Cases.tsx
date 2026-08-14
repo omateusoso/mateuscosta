@@ -7,8 +7,10 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { copy, type Locale, withLocale } from "@/lib/i18n";
 
-export function Cases({ cases }: { cases: PortfolioCase[] }) {
+export function Cases({ cases, locale }: { cases: PortfolioCase[]; locale: Locale }) {
+  const text = copy[locale].cases;
   const [activeCase, setActiveCase] = useState<string | null>(null);
 
   return (
@@ -16,20 +18,20 @@ export function Cases({ cases }: { cases: PortfolioCase[] }) {
       <ScrollReveal>
         <SectionHeading
           id="cases-title"
-          label="Portfólio"
+          label={copy[locale].labels.portfolio}
           labelIcon="cases"
-          title="O Futuro do Design em meus cases"
-          description="Confira algumas das minhas criações"
+          title={text.title}
+          description={text.description}
         />
       </ScrollReveal>
       <div className="cases-grid">
         {cases.map((item, index) => (
           <ScrollReveal delay={index * 0.025} key={item.id}>
             <a
-              aria-label={`Ver case ${item.title}`}
+              aria-label={`${text.view} ${item.title}`}
               className="case-card"
               data-active={activeCase === item.id || undefined}
-              href={`/cases/${item.slug}`}
+              href={withLocale(locale, `/cases/${item.slug}`)}
               onClick={(event) => {
                 if (!matchMedia("(max-width: 809px)").matches) return;
                 event.preventDefault();
@@ -56,7 +58,7 @@ export function Cases({ cases }: { cases: PortfolioCase[] }) {
           </ScrollReveal>
         ))}
       </div>
-      <div className="section-action"><ButtonLink href="/cases">Ver todos os cases</ButtonLink></div>
+      <div className="section-action"><ButtonLink href={withLocale(locale, "/cases")}>{text.all}</ButtonLink></div>
     </Section>
   );
 }

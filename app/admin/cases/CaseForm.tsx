@@ -79,13 +79,14 @@ function SortableProjectImage({ image, index, onRemove }: { image: ProjectImage;
   </li>;
 }
 
-export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptions, action, createCategoryAction }: {
+export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptions, action, createCategoryAction, locale = "pt-br" }: {
   item?: PortfolioCase;
   media?: EditableMedia[];
   coverPreviewUrl?: string;
   categoryOptions: string[];
   action: (data: FormData) => Promise<SaveResult>;
   createCategoryAction: (data: FormData) => Promise<{ name: string; slug: string }>;
+  locale?: "pt-br" | "en" | "es";
 }) {
   const [pending, startTransition] = useTransition();
   const [serverError, setServerError] = useState("");
@@ -155,7 +156,7 @@ export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptio
         await minimumDelay;
         setOperation({ intent: nextIntent, phase: "success" });
         await new Promise<void>((resolve) => window.setTimeout(resolve, 900));
-        window.location.assign(`/admin/cases/${result.caseId}/edit?notice=${result.notice}`);
+        window.location.assign(`/admin/cases/${result.caseId}/edit?notice=${result.notice}&language=${locale}`);
       } catch (cause) {
         await minimumDelay;
         setServerError(cause instanceof Error ? cause.message : "Não foi possível concluir a ação. Tente novamente.");
@@ -348,6 +349,7 @@ export function CaseForm({ item, media = [], coverPreviewUrl = "", categoryOptio
       {item ? <input type="hidden" name="id" value={item.id} /> : null}
       {item ? <input type="hidden" name="version" value={item.version} /> : null}
       <input type="hidden" {...register("status")} />
+      <input type="hidden" name="locale" value={locale} />
       <input type="hidden" {...register("categories")} />
       <input type="hidden" {...register("cover_url")} />
       <input type="hidden" {...register("external_link_enabled")} />

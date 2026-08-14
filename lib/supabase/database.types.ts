@@ -51,6 +51,25 @@ export interface PortfolioCase {
   portfolio_case_media?: PortfolioCaseMedia[];
 }
 
+export interface PortfolioCaseTranslation {
+  [key: string]: unknown;
+  id: string;
+  case_id: string;
+  locale: "en" | "es";
+  slug: string;
+  title: string;
+  excerpt: string;
+  content_json: Json;
+  content_html: string;
+  seo_title: string;
+  seo_description: string;
+  external_link_label: string;
+  status: "draft" | "published";
+  version: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface PortfolioCategory {
   [key: string]: unknown;
   id: string;
@@ -74,6 +93,12 @@ export interface Database {
         Row: PortfolioCaseMedia;
         Insert: Partial<PortfolioCaseMedia> & Pick<PortfolioCaseMedia, "case_id">;
         Update: Partial<PortfolioCaseMedia>;
+        Relationships: [];
+      };
+      portfolio_case_translations: {
+        Row: PortfolioCaseTranslation;
+        Insert: Partial<PortfolioCaseTranslation> & Pick<PortfolioCaseTranslation, "case_id" | "locale" | "slug">;
+        Update: Partial<PortfolioCaseTranslation>;
         Relationships: [];
       };
       portfolio_categories: {
