@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/lib/content/site";
 import { copy, type Locale, withLocale } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 
 export function MobileNav({ locale }: { locale: Locale }) {
   const text = copy[locale];
@@ -34,9 +35,12 @@ export function MobileNav({ locale }: { locale: Locale }) {
               <a key={href} href={href} className="button button--tertiary" onClick={() => setOpen(false)}>{label}</a>
             ))}
           </div>
-          <a className="button button--secondary mobile-nav__cta" href={siteConfig.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
-            {text.nav.contact}
-          </a>
+          <div className="mobile-nav__actions">
+            <a className="button button--secondary mobile-nav__cta" href={siteConfig.whatsapp} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
+              {text.nav.contact}
+            </a>
+            <LanguageSwitcher locale={locale} />
+          </div>
         </div>
       </nav>
     </div>
